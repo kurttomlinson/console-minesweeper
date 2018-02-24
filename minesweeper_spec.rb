@@ -31,9 +31,9 @@ describe 'MinesweeperPoint#initialize' do
 end
 
 describe 'MinesweeperBoard#initialize' do
-  it 'should create a board with about 10 bombs when width=20, height=5 and bomb_likelihood_percent=10' do
-    width = 20
-    height = 5
+  it 'should create a board with about 1000 bombs when width=200, height=50 and bomb_likelihood_percent=10' do
+    width = 200
+    height = 50
     board = MinesweeperBoard.new(height: height, width: width, bomb_likelihood_percent: 10)
 
     bomb_count = 0
@@ -43,7 +43,8 @@ describe 'MinesweeperBoard#initialize' do
       end
     end
 
-    expect(bomb_count).to be > 5
-    expect(bomb_count).to be < 15
+    expect(bomb_count).to be > 500
+    expect(bomb_count).to be < 1500
   end
 end
+
