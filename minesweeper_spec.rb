@@ -48,3 +48,48 @@ describe 'MinesweeperBoard#initialize' do
   end
 end
 
+describe 'MinesweeperBoard#load_board' do
+  it 'should create a board from a 2D array' do
+    board = MinesweeperBoard.new()
+    board.load_board([[1],[0],[0]])
+    expect(board.bomb_present?(row: 0, column: 0)).to be true
+    expect(board.bomb_present?(row: 1, column: 0)).to be false
+    expect(board.bomb_present?(row: 2, column: 0)).to be false
+  end
+end
+
+describe 'MinesweeperBoard#bomb_present?' do
+  it 'should raise an error when checking an invalid point' do
+    board = MinesweeperBoard.new()
+    board.load_board([[1],[0],[0]])
+    expect { board.bomb_present?(row: 0, column: 1)}.to raise_error("invalid point")
+    expect { board.bomb_present?(row: 0, column: 2)}.to raise_error("invalid point")
+  end
+end
+
+describe 'MinesweeperBoard#uncover_point' do
+  it 'should return "bomb" when a bomb is uncovered' do
+    board = MinesweeperBoard.new()
+    board.load_board([[1],[0],[0]])
+    expect(board.uncover_point(row: 0, column: 0)).to include('bomb')
+  end
+  it 'should return the number of adjacent bombs when uncovered' do
+    board = MinesweeperBoard.new()
+    board.load_board([[1],[0],[0]])
+    expect(board.uncover_point(row: 1, column: 0)).to include('1')
+    expect(board.uncover_point(row: 2, column: 0)).to include('0')
+  end
+  it 'should raise an error when an invalid point is uncovered' do
+    board = MinesweeperBoard.new()
+    board.load_board([[1],[0],[0]])
+    expect { board.uncover_point(row: 0, column: 1) }.to raise_error("invalid point")
+  end
+end
+
+describe 'MinesweeperGame#make_move' do
+  it 'should raise an error on invalid moves' do
+    game = MinesweeperGame.new
+    expect { game.make_move(-1, -1) }.to raise_error("invalid move")
+    expect { game.make_move(1000, 1000) }.to raise_error("invalid move")
+  end
+end
