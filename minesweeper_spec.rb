@@ -4,12 +4,25 @@ require './minesweeper'
 
 describe 'MinesweeperPoint#initialize' do
   it 'should have a bomb present if bomb_likelihood_percent is 100' do
-    point = MinesweeperPoint.new(100)
+    point = MinesweeperPoint.new(bomb_likelihood_percent: 100)
     expect(point.bomb_present).to be true
   end
   it 'should not have a bomb present if bomb_likelihood_percent is 0' do
-    point = MinesweeperPoint.new(0)
+    point = MinesweeperPoint.new(bomb_likelihood_percent: 0)
     expect(point.bomb_present).to be false
+  end
+  it 'should have a bomb present half of the time if bomb_likelihood_percent is 50' do
+    bomb_count = 0
+    experiment_count = 1000000
+    experiment_count.times do
+      point = MinesweeperPoint.new(bomb_likelihood_percent: 50)
+      if point.bomb_present?
+        bomb_count += 1
+      end
+    end
+    bomb_percentage = 100.0 * bomb_count / experiment_count
+    expect(bomb_percentage).to be > 49.5
+    expect(bomb_percentage).to be < 50.5
   end
   it 'should create a covered point' do
     point = MinesweeperPoint.new()
