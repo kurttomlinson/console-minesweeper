@@ -89,7 +89,16 @@ end
 describe 'MinesweeperGame#make_move' do
   it 'should raise an error on invalid moves' do
     game = MinesweeperGame.new
-    expect { game.make_move(-1, -1) }.to raise_error("invalid move")
-    expect { game.make_move(1000, 1000) }.to raise_error("invalid move")
+    expect { game.make_move(row: -1, column: -1) }.to raise_error("invalid move")
+    expect { game.make_move(row: 1000, column: 1000) }.to raise_error("invalid move")
+  end
+end
+
+describe 'MinesweeperGame#make_move' do
+  it 'should set the game status to :lose when a bomb is uncovered' do
+    game = MinesweeperGame.new
+    game.board.load_board([[1],[0],[0]])
+    game.make_move(row: 0, column: 0)
+    expect(game.status).to be :lose
   end
 end

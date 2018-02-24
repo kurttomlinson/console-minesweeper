@@ -1,1 +1,1 @@
-require './minesweeper_board'
+require './minesweeper_game'
