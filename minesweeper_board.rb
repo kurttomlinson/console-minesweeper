@@ -66,7 +66,7 @@ class MinesweeperBoard
     lines = "\n"
     lines += "    " + (0..@width-1).map { |i| i.to_s + " " }.join('')
     lines += "\n"
-    lines += "    " + (0..@width-1).map { |i| "- " }.join('')
+    lines += "    " + (0..@width-1).map { "- " }.join('')
     lines += "\n"
     @height.times do |row|
       lines += "#{row} | "
@@ -95,7 +95,6 @@ class MinesweeperBoard
             next
           end
           if (row + row_offset >= 0) && (row + row_offset < @height) && (column + column_offset >= 0) && (column + column_offset < @width)
-            adjacent_bomb_present = @points[row + row_offset][column + column_offset].bomb_present?
             adjacent_bomb_count += 1 if @points[row + row_offset][column + column_offset].bomb_present?
           end
         end
