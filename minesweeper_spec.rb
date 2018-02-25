@@ -81,8 +81,6 @@ describe 'MinesweeperBoard#to_s' do
     board.load_board([[1],[0],[0]])
     board.uncover_point(row: 2, column: 0)
 
-    puts board.to_s
-
     expect(board.to_s).to include("    0")
     expect(board.to_s).to include("    -")
     expect(board.to_s).to include("0 |")
@@ -100,11 +98,23 @@ describe 'MinesweeperGame#make_move' do
 end
 
 describe 'MinesweeperGame#make_move' do
+  it 'should set the status to :win if the game is over' do
+    game = MinesweeperGame.new()
+    game.board.load_board([[1],[0],[0]])
+    game.make_move(row: 2, column: 0)
+
+
+    expect(game.board.points[0][0].covered).to be true
+    expect(game.board.points[1][0].covered).to be false
+    expect(game.board.points[2][0].covered).to be false
+
+    expect(game.status).to eq :win
+  end
   it 'should set the game status to :lose when a bomb is uncovered' do
     game = MinesweeperGame.new
     game.board.load_board([[1],[0],[0]])
     game.make_move(row: 0, column: 0)
-    expect(game.status).to be :lose
+    expect(game.status).to eq :lose
   end
   it 'should uncover adjacent non-bombs when an empty square is uncovered' do
     game = MinesweeperGame.new

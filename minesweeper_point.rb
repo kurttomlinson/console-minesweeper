@@ -12,4 +12,7 @@ class MinesweeperPoint
   def bomb_present?
     bomb_present
   end
+  def covered?
+    covered
+  end
 end

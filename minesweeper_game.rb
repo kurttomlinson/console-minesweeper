@@ -19,9 +19,23 @@ class MinesweeperGame
     if @board.bomb_present?(row: row, column: column)
       @status = :lose
     end
+    if game_is_won?
+      @status = :win
+    end
   end
 
   def bomb_present?(row: 0, column: 0)
     @board[row][column].bomb_present?
+  end
+
+  private
+
+  def game_is_won?
+    @board.points.flatten.each do |point|
+      if !point.bomb_present? && point.covered?
+        return false
+      end
+    end
+    return true
   end
 end
