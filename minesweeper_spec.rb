@@ -1,5 +1,5 @@
 require 'rspec'
-require './minesweeper'
+require './minesweeper_game'
 
 
 describe 'MinesweeperPoint#initialize' do
@@ -94,6 +94,10 @@ describe 'MinesweeperGame#make_move' do
     game = MinesweeperGame.new
     expect { game.make_move(row: -1, column: -1) }.to raise_error("invalid move")
     expect { game.make_move(row: 1000, column: 1000) }.to raise_error("invalid move")
+  end
+  it 'should not raise an error on valid moves' do
+    game = MinesweeperGame.new(height: 10, width: 5, bomb_likelihood_percent: 20)
+    expect { game.make_move(row: 7, column: 0) }.to_not raise_error
   end
 end
 
