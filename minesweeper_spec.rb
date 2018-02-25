@@ -62,8 +62,8 @@ describe 'MinesweeperBoard#bomb_present?' do
   it 'should raise an error when checking an invalid point' do
     board = MinesweeperBoard.new()
     board.load_board([[1],[0],[0]])
-    expect { board.bomb_present?(row: 0, column: 1)}.to raise_error("invalid point")
-    expect { board.bomb_present?(row: 0, column: 2)}.to raise_error("invalid point")
+    expect { board.bomb_present?(row: 0, column: 1)}.to raise_error(MinesweeperBoard::InvalidPointError)
+    expect { board.bomb_present?(row: 0, column: 2)}.to raise_error(MinesweeperBoard::InvalidPointError)
   end
 end
 
@@ -82,7 +82,7 @@ describe 'MinesweeperBoard#uncover_point' do
   it 'should raise an error when an invalid point is uncovered' do
     board = MinesweeperBoard.new()
     board.load_board([[1],[0],[0]])
-    expect { board.uncover_point(row: 0, column: 1) }.to raise_error("invalid point")
+    expect { board.uncover_point(row: 0, column: 1) }.to raise_error(MinesweeperBoard::InvalidPointError)
   end
 end
 
@@ -100,5 +100,14 @@ describe 'MinesweeperGame#make_move' do
     game.board.load_board([[1],[0],[0]])
     game.make_move(row: 0, column: 0)
     expect(game.status).to be :lose
+  end
+  it 'should uncover adjacent non-bombs when an empty square is uncovered' do
+    game = MinesweeperGame.new
+    game.board.load_board([[1],[0],[0],[0]])
+    game.make_move(row: 3, column: 0)
+    expect(game.board.points[0][0].covered).to be true
+    expect(game.board.points[1][0].covered).to be false
+    expect(game.board.points[2][0].covered).to be false
+    expect(game.board.points[3][0].covered).to be false
   end
 end
