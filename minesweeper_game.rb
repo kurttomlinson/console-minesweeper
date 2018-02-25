@@ -8,7 +8,7 @@ class MinesweeperGame
     @height = height
     @width = width
     @board = MinesweeperBoard.new(height: height, width: width, bomb_likelihood_percent: bomb_likelihood_percent)
-    @game_status = :in_progress
+    @status = :in_progress
   end
 
   def make_move(row: 0, column: 0)
