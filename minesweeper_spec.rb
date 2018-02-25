@@ -1,7 +1,6 @@
 require 'rspec'
 require './minesweeper_game'
 require 'pry'
-require 'pry-byebug'
 
 
 describe 'MinesweeperPoint#initialize' do

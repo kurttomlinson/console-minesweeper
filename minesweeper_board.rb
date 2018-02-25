@@ -50,7 +50,6 @@ class MinesweeperBoard
           next_row = row + row_offset
           next_col = column + column_offset
           begin
-            self.bomb_present?(row: next_row, column: next_col)
             unless self.bomb_present?(row: next_row, column: next_col)
               self.uncover_point(row: next_row, column: next_col)
             end
