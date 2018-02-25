@@ -68,17 +68,6 @@ describe 'MinesweeperBoard#bomb_present?' do
 end
 
 describe 'MinesweeperBoard#uncover_point' do
-  it 'should return "bomb" when a bomb is uncovered' do
-    board = MinesweeperBoard.new()
-    board.load_board([[1],[0],[0]])
-    expect(board.uncover_point(row: 0, column: 0)).to include('bomb')
-  end
-  it 'should return the number of adjacent bombs when uncovered' do
-    board = MinesweeperBoard.new()
-    board.load_board([[1],[0],[0]])
-    expect(board.uncover_point(row: 1, column: 0)).to include('1')
-    expect(board.uncover_point(row: 2, column: 0)).to include('0')
-  end
   it 'should raise an error when an invalid point is uncovered' do
     board = MinesweeperBoard.new()
     board.load_board([[1],[0],[0]])

@@ -45,25 +45,20 @@ class MinesweeperBoard
       return
     end
     @points[row][column].covered = false
-    if @points[row][column].bomb_present?
-      return "bomb"
-    else
-      if adjacent_bomb_count(row: row, column: column) == 0
-        [-1, 0, 1].each do |row_offset|
-          [-1, 0, 1].each do |column_offset|
-            next_row = row + row_offset
-            next_col = column + column_offset
-            begin
-              self.bomb_present?(row: next_row, column: next_col)
-              unless self.bomb_present?(row: next_row, column: next_col)
-                self.uncover_point(row: next_row, column: next_col)
-              end
-            rescue InvalidPointError
+    if adjacent_bomb_count(row: row, column: column) == 0
+      [-1, 0, 1].each do |row_offset|
+        [-1, 0, 1].each do |column_offset|
+          next_row = row + row_offset
+          next_col = column + column_offset
+          begin
+            self.bomb_present?(row: next_row, column: next_col)
+            unless self.bomb_present?(row: next_row, column: next_col)
+              self.uncover_point(row: next_row, column: next_col)
             end
+          rescue InvalidPointError
           end
         end
       end
-      return adjacent_bomb_count(row: row, column: column).to_s
     end
   end
 
