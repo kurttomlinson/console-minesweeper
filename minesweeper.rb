@@ -11,7 +11,6 @@ bomb_likelihood = gets.to_i
 
 game = MinesweeperGame.new(height: height, width: width, bomb_likelihood_percent: bomb_likelihood)
 
-puts "game.status: #{game.status}"
 while game.status == :in_progress
   puts game.board
   puts "x?"
