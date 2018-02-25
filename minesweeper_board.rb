@@ -9,7 +9,7 @@ class MinesweeperBoard
   def initialize(height: 10, width: 10, bomb_likelihood_percent: 10)
     @height = height
     @width = width
-    @points = Array.new(@height) { Array.new(@width)}
+    @points = Array.new(@height) { Array.new(@width) }
     @height.times do |row|
       @width.times do |column|
         @points[row][column] = MinesweeperPoint.new(bomb_likelihood_percent: bomb_likelihood_percent)
@@ -20,7 +20,7 @@ class MinesweeperBoard
   def load_board(bomb_positions)
     @height = bomb_positions.length
     @width = bomb_positions[0].length
-    @points = Array.new(@height) { Array.new(@width)}
+    @points = Array.new(@height) { Array.new(@width) }
     @height.times do |row|
       @width.times do |column|
         bomb_likelihood_percent = 100.0 * bomb_positions[row][column]
