@@ -71,8 +71,10 @@ class MinesweeperBoard
     @height.times do |row|
       lines += "#{row} | "
       @width.times do |column|
-        if @points[row][column].covered
+        if @points[row][column].covered?
           lines += "  "
+        elsif @points[row][column].bomb_present?
+          lines += "x "
         else
           lines += "#{adjacent_bomb_count(row: row, column: column)} "
         end
