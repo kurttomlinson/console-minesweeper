@@ -24,10 +24,6 @@ class MinesweeperGame
     end
   end
 
-  def bomb_present?(row: 0, column: 0)
-    @board[row][column].bomb_present?
-  end
-
   private
 
   def game_is_won?
