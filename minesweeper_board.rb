@@ -62,6 +62,27 @@ class MinesweeperBoard
     end
   end
 
+  def to_s
+    # column numbers
+    lines = "\n"
+    lines += "    " + (0..@width-1).map { |i| i.to_s + " " }.join('')
+    lines += "\n"
+    lines += "    " + (0..@width-1).map { |i| "- " }.join('')
+    lines += "\n"
+    @height.times do |row|
+      lines += "#{row} | "
+      @width.times do |column|
+        if @points[row][column].covered
+          lines += "  "
+        else
+          lines += "#{adjacent_bomb_count(row: row, column: column)} "
+        end
+      end
+      lines += "\n"
+    end
+    lines
+  end
+
   private
 
   def adjacent_bomb_count(row: 0, column: 0)

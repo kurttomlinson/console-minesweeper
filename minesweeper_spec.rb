@@ -75,6 +75,22 @@ describe 'MinesweeperBoard#uncover_point' do
   end
 end
 
+describe 'MinesweeperBoard#to_s' do
+  it 'should print the game board' do
+    board = MinesweeperBoard.new()
+    board.load_board([[1],[0],[0]])
+    board.uncover_point(row: 2, column: 0)
+
+    puts board.to_s
+
+    expect(board.to_s).to include("    0")
+    expect(board.to_s).to include("    -")
+    expect(board.to_s).to include("0 |")
+    expect(board.to_s).to include("1 | 1")
+    expect(board.to_s).to include("2 | 0")
+  end
+end
+
 describe 'MinesweeperGame#make_move' do
   it 'should raise an error on invalid moves' do
     game = MinesweeperGame.new
