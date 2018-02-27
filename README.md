@@ -3,7 +3,7 @@ A console version of Minesweeper written in Ruby
 
 # How to play
 
-Just run `ruby ./minesweeper.rb`.
+Run `ruby ./minesweeper.rb`.
 
 # How to test
 
@@ -20,7 +20,6 @@ board height?
 4
 bomb likelihood percent? (0 to 100)
 20
-game.status: in_progress
 
     0 1 2 3 4 5
     - - - - - -
