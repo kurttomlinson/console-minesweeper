@@ -95,19 +95,11 @@ describe 'MinesweeperGame#make_move' do
     game = MinesweeperGame.new(height: 10, width: 5, bomb_likelihood_percent: 20)
     expect { game.make_move(row: 7, column: 0) }.to_not raise_error
   end
-end
-
-describe 'MinesweeperGame#make_move' do
   it 'should set the status to :win if the game is over' do
     game = MinesweeperGame.new()
-    game.board.load_board([[1],[0],[0]])
-    game.make_move(row: 2, column: 0)
-
-
-    expect(game.board.points[0][0].covered).to be true
-    expect(game.board.points[1][0].covered).to be false
-    expect(game.board.points[2][0].covered).to be false
-
+    game.board.load_board([[1],[0],[1],[0],[0]])
+    game.make_move(row: 1, column: 0)
+    game.make_move(row: 4, column: 0)
     expect(game.status).to eq :win
   end
   it 'should set the game status to :lose when a bomb is uncovered' do
@@ -118,11 +110,13 @@ describe 'MinesweeperGame#make_move' do
   end
   it 'should uncover adjacent non-bombs when an empty square is uncovered' do
     game = MinesweeperGame.new
-    game.board.load_board([[1],[0],[0],[0]])
-    game.make_move(row: 3, column: 0)
+    game.board.load_board([[1],[0],[1],[0],[0],[0]])
+    game.make_move(row: 5, column: 0)
     expect(game.board.points[0][0].covered).to be true
-    expect(game.board.points[1][0].covered).to be false
-    expect(game.board.points[2][0].covered).to be false
+    expect(game.board.points[1][0].covered).to be true
+    expect(game.board.points[2][0].covered).to be true
     expect(game.board.points[3][0].covered).to be false
+    expect(game.board.points[4][0].covered).to be false
+    expect(game.board.points[5][0].covered).to be false
   end
 end
