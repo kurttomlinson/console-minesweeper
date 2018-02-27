@@ -2,6 +2,8 @@ require './minesweeper_point'
 
 class MinesweeperBoard
   attr_accessor :points
+  attr_accessor :height
+  attr_accessor :width
 
   class InvalidPointError < RuntimeError
   end
@@ -61,7 +63,6 @@ class MinesweeperBoard
   end
 
   def to_s
-    # column numbers
     lines = "\n"
     lines += "    " + (0..@width-1).map { |i| i.to_s + " " }.join('')
     lines += "\n"

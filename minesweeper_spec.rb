@@ -91,11 +91,6 @@ describe 'MinesweeperBoard#to_s' do
 end
 
 describe 'MinesweeperGame#make_move' do
-  it 'should raise an error on invalid moves' do
-    game = MinesweeperGame.new
-    expect { game.make_move(row: -1, column: -1) }.to raise_error("invalid move")
-    expect { game.make_move(row: 1000, column: 1000) }.to raise_error("invalid move")
-  end
   it 'should not raise an error on valid moves' do
     game = MinesweeperGame.new(height: 10, width: 5, bomb_likelihood_percent: 20)
     expect { game.make_move(row: 7, column: 0) }.to_not raise_error
