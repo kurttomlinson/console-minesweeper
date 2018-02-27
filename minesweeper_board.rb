@@ -62,6 +62,12 @@ class MinesweeperBoard
     end
   end
 
+  def uncover_all_points
+    @points.flatten.each do |point|
+      point.covered = false
+    end
+  end
+
   def to_s
     lines = "\n"
     lines += "    " + (0..@width-1).map { |i| i.to_s + " " }.join('')

@@ -12,11 +12,13 @@ class MinesweeperGame
 
   def make_move(row: 0, column: 0)
     @board.uncover_point(row: row, column: column)
-    if @board.bomb_present?(row: row, column: column)
+    if (@board.bomb_present?(row: row, column: column)) && (@status == :in_progress)
       @status = :lose
+      @board.uncover_all_points
     end
-    if game_is_won?
+    if (game_is_won?) && (@status == :in_progress)
       @status = :win
+      @board.uncover_all_points
     end
   end
 
